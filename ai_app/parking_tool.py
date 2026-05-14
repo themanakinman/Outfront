@@ -34,7 +34,8 @@ def query_parking(street_name: str = "", status: str = 'VACANT', limit: int = 5)
         parking_spots.append({
             "spaceid": row.spaceid,
             "address": address,
-            "coords": f"{row.latitude}, {row.longitude}",
+            "lat": float(row.latitude) if row.latitude else None,
+            "lng": float(row.longitude) if row.longitude else None,
             "status": row.occupancystate
         })
         
@@ -135,7 +136,9 @@ def find_parking_near_address(address: str, status: str = 'VACANT', limit: int =
         parking_spots.append({
             "spaceid": row.spaceid,
             "address": row.blockface if row.blockface else "Unknown",
-            "distance_meters": round(row.distance_meters, 1),
+            "lat": float(row.latitude) if row.latitude else None,
+            "lng": float(row.longitude) if row.longitude else None,
+            "distance_meters": round(row.distance_meters, 1) if hasattr(row, 'distance_meters') else None,
             "status": row.occupancystate
         })
         
