@@ -18,13 +18,13 @@ function App() {
     zoom: 15
   });
 
-  const locations = ['Rodeo', 'Sunset', 'Melrose', 'Figueroa', 'Alameda', 'Hollywood', 'Mulholland', 'Abbot', 'Wilshire', 'Main', 'Olympic', 'Spring', 'Broadway', 'Figueroa'];
+  const locations = ['Rodeo Dr', 'Sunset Blvd', 'Melrose Ave', 'Figueroa St', 'Alameda St', 'Hollywood Blvd', 'Mulholland Dr', 'Wilshire St', 'Main St', 'Olympic Blvd', 'Spring St', 'Broadway', 'Exposition Blvd'];
 
   useEffect(() => {
     if (isSubmitted) return;
     const interval = setInterval(() => {
       setWordIndex((prev) => (prev + 1) % locations.length);
-    }, 2500);
+    }, 2000);
     return () => clearInterval(interval);
   }, [isSubmitted]);
 
@@ -114,6 +114,12 @@ function App() {
       )}
 
       <div className={`chat-wrapper ${isSubmitted ? 'docked' : ''}`}>
+        {!isSubmitted && (
+          <div className="chat-header">
+            <span className="light">Find parking, </span>
+            <span className="bold">Outfront</span>
+          </div>
+        )}
         <form className="chat-form" onSubmit={handleSubmit}>
           {!query && !isSubmitted && (
             <div className="placeholder-container">
