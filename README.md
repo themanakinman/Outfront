@@ -1,5 +1,7 @@
 # Outfront - LA Street Parking AI Data Lakehouse
 
+![Outfront Demo](app_ui/src/assets/demo.gif)
+
 An autonomous, end-to-end data pipeline and Agentic RAG (Retrieval-Augmented Generation) application. This platform ingests live Los Angeles parking meter data, enriches it with geospatial inventory via Apache Iceberg, and provides a beautiful, conversational React UI mapped to an AI backend using Google Gemini and BigQuery.
 
 ## Project Structure
