@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: parking-process-cron
+spec:
+  schedule: "5 * * * *" # 5 minutes past every hour
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: spark-k8s-sa
+          containers:
+          - name: processor
+            image: us-central1-docker.pkg.dev/ladot-496020/parking-repo/parking-processor:v1
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                /opt/spark/bin/spark-submit /app/process_parking.py && \
+                /opt/spark/bin/spark-submit /app/process_inventory.py
+            env:
+            - name: BUCKET_NAME
+              value: "parking-data-lake-v1"
+          restartPolicy: OnFailure

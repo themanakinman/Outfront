@@ -1,0 +1,7 @@
+{
+  "sourceFormat": "ICEBERG",
+  "sourceUris": [
+    "gs://parking-data-lake-v1/processed/db/enriched_occupancy/metadata/v1.metadata.json"
+  ]
+}
+

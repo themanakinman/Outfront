@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: parking-ingest-job
+spec:
+  template:
+    spec:
+      serviceAccountName: spark-k8s-sa 
+      containers:
+      - name: ingestor
+        image: us-central1-docker.pkg.dev/ladot-496020/parking-repo/parking-ingest:v1
+        imagePullPolicy: Always
+        env:
+        - name: BUCKET_NAME
+          value: "parking-data-lake-v1"
+      restartPolicy: Never
+      
